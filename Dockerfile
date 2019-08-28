@@ -1,5 +1,7 @@
-FROM python:3.7
+FROM python:3-alpine
 COPY . /app
 WORKDIR /app
-RUN pip install -r requirements.txt
-CMD ["python", "./app.py"]
+RUN pip install --trusted-host pypi.org --trusted-host files.pythonhosted.org -r requirements.txt
+ENTRYPOINT ["python"]
+CMD ["app.py"]
+EXPOSE 5000
