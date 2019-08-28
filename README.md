@@ -2,17 +2,17 @@
 
 ## Buildar
 
-docker build --tag=teste .
+`docker build --tag=teste .`
 
 ## Rodar
 
-docker run -p teste
+`docker run -p teste`
 
 # Configuração local
 
 ## Installar
-pip install pandas matplotlib statsmodels sklearn seaborn
+`pip install pandas matplotlib statsmodels sklearn seaborn`
 
 ## Rodar
 
-python app.py
+`python app.py`
