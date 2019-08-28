@@ -1,9 +1,18 @@
-# ia-class-regression
+# Configuração com Docker
 
-Buildar
+## Buildar
 
 docker build --tag=teste .
 
-Rodar
+## Rodar
 
 docker run -p teste
+
+# Configuração local
+
+## Installar
+pip install pandas matplotlib statsmodels sklearn seaborn
+
+## Rodar
+
+python app.py
