@@ -1,26 +1,19 @@
-import pandas as pd
-from sklearn.model_selection import train_test_split
-from sklearn.linear_model import LogisticRegression
-candidates = {'gmat':
-              [780, 750, 690, 710, 680, 730, 690, 720, 740, 690, 610, 690, 710, 680, 770, 610, 580, 650, 540,
-               590, 620, 600, 550, 550, 570, 670, 660, 580, 650, 660, 640, 620, 660, 660, 680, 650, 670, 580, 590, 690],
-              'gpa':
-              [4, 3.9, 3.3, 3.7, 3.9, 3.7, 2.3, 3.3, 3.3, 1.7, 2.7, 3.7, 3.7, 3.3, 3.3, 3, 2.7, 3.7, 2.7, 2.3,
-               3.3, 2, 2.3, 2.7, 3, 3.3, 3.7, 2.3, 3.7, 3.3, 3, 2.7, 4, 3.3, 3.3, 2.3, 2.7, 3.3, 1.7, 3.7],
-              'work_experience':
-              [3, 4, 3, 5, 4, 6, 1, 4, 5, 1, 3, 5, 6, 4, 3, 1, 4, 6, 2, 3, 2, 1, 4, 1, 2, 6, 4, 2, 6, 5, 1, 2, 4, 6, 5, 1, 2, 1,
-                  4, 5],
-              'admitted':
-              [1, 1, 1, 1, 1, 1, 0, 1, 1, 0, 0, 1, 1, 1, 1, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 1, 1, 0, 0, 1, 1, 1, 0, 0, 0,
-                  0, 1]
-              }
-df = pd.DataFrame(candidates, columns=['gmat',
-                                       'gpa', 'work_experience', 'admitted'])
-X = df[['gmat', 'gpa', 'work_experience']]
-y = df['admitted']
-X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.25, random_state=0)  # train is based on 75% of the dataset, test is based on 25 % of dataset
-logistic_regression = LogisticRegression()
-logistic_regression.fit(X_train, y_train)
-y_pred = logistic_regression.predict(X_test)
-print(X_test)  # test dataset (without the actual outcome)
-print(y_pred)  # predicted values
+from pandas import DataFrame
+import matplotlib.pyplot as plt
+from sklearn.cluster import KMeans
+
+Data = {'x':
+        [25, 34, 22, 27, 33, 33, 31, 22, 35, 34, 67, 54, 57, 43, 50, 57, 59, 52, 65, 47, 49, 48, 35, 33, 44, 45, 38, 43, 51, 46],
+        'y':
+        [79, 51, 53, 78, 59, 74, 73, 57, 69, 75, 51, 32, 40, 47, 53,
+            36, 35, 58, 59, 50, 25, 20, 14, 12, 20, 5, 29, 27, 8, 7]
+        }
+
+df = DataFrame(Data, columns=['x', 'y'])
+
+kmeans = KMeans(n_clusters=3).fit(df)
+centroids = kmeans.cluster_centers_
+print(centroids)
+plt.scatter(df['x'], df['y'], c=kmeans.labels_.astype(float), s=50,
+            alpha=0.5)
+plt.scatter(centroids[:, 0], centroids[:, 1], c='red', s=50)
